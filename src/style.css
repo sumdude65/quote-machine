@@ -8,8 +8,7 @@
 body {
   width: 100%;
   background-color: var(--primary-color);
-  --primary-color: #520248;
+  --primary-color: #bd4500;
   --secondary-color: #fff;
-  --paragraph-color: rgba(0, 0, 0, 0.5);
-  --heading-color: #000;
+  --paragraph-color: rgb(153, 153, 153);
 }
