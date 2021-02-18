@@ -1,0 +1,23 @@
+@import "../../style.css";
+
+.main {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.reviewapp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  margin: 2rem;
+}
+.review-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+}

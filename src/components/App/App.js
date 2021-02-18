@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
 import { Data } from "../data/index";
+import { Header } from "../Header/index";
 import { Review } from "../review/index";
 
 export const App = () => {
@@ -14,9 +15,9 @@ export const App = () => {
     }
   };
   useEffect(() => {
-    setTimeout(updateReview, 3000);
+    const timeoutId = setTimeout(updateReview, 3000);
     return () => {
-      clearTimeout(updateReview, 3000);
+      clearTimeout(timeoutId);
     };
   });
   const previous = () => {
@@ -35,37 +36,42 @@ export const App = () => {
   };
   return (
     <main className="main">
-      <button className="btn left" onClick={previous}>
-        <svg
-          stroke="currentColor"
-          fill="none"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          height="1em"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-      </button>
-      <Review props={entries[currentReview]} />
-      <button className="btn right" onClick={next}>
-        <svg
-          stroke="currentColor"
-          fill="none"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          height="1em"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-      </button>
+      <Header />
+      <div className="reviewapp">
+        <button className="btn left" onClick={previous}>
+          <svg
+            stroke="currentColor"
+            fill="none"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <div className="review-slide">
+          <Review props={entries[currentReview]} />
+        </div>
+        <button className="btn right" onClick={next}>
+          <svg
+            stroke="currentColor"
+            fill="none"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
     </main>
   );
 };
