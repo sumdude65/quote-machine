@@ -11,4 +11,5 @@ body {
   --primary-color: #bd4500;
   --secondary-color: #cee5ed;
   --paragraph-color: rgb(153, 153, 153);
+  --transition: all 0.3s linear;
 }

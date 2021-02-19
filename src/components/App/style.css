@@ -8,21 +8,52 @@
   align-items: center;
   justify-content: center;
 }
-.reviewapp {
+.center {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50%;
-  margin: 2rem;
+  width: 80%;
+  height: 450px;
+  overflow: hidden;
+  position: relative;
+  max-width: 800px;
+  margin: 4rem auto;
 }
-.review-slide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 3rem;
-  transition: all 2s linear;
+.center section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: var(--transition);
 }
+.left,
+.right {
+  position: absolute;
+  top: 50%;
+}
+.left {
+  left: 0;
+}
+.right {
+  right: 0;
+}
+.previous-slide,
+.next-slide {
+  opacity: 0;
+}
+.previous-slide {
+  transform: translateX(-100%);
+}
+.next-slide {
+  transform: translateX(100%);
+}
+.active-slide {
+  opacity: 1;
+  transform: translateX(0%);
+}
+.btn,
 .svg {
-  font-size: 50px;
+  font-size: 2rem;
   color: var(--primary-color);
 }

@@ -3,75 +3,62 @@ import "./style.css";
 import { Data } from "../data/index";
 import { Header } from "../Header/index";
 import { Review } from "../review/index";
+import { LeftArrow, RightArrow } from "./icon";
 
 export const App = () => {
-  const entries = [...Data];
-  const [currentReview, setCurrentReview] = useState(0);
-  const updateReview = () => {
-    if (currentReview === entries.length - 1) {
-      setCurrentReview(0);
+  // eslint-disable-next-line
+  const [people, setPeople] = useState(Data);
+  const [index, setIndex] = useState(0);
+  const maxPeople = people.length - 1;
+  const updateIndex = () => {
+    if (index > maxPeople) {
+      setIndex(0);
     } else {
-      setCurrentReview(currentReview + 1);
+      setIndex(index + 1);
     }
   };
   useEffect(() => {
-    const timeoutId = setTimeout(updateReview, 3000);
+    if (index < 0) {
+      setIndex(maxPeople);
+    }
+    if (index > maxPeople) {
+      setIndex(0);
+    }
+  }, [index, maxPeople]);
+  useEffect(() => {
+    let timeoutId = setInterval(updateIndex, 5000);
     return () => {
-      clearTimeout(timeoutId);
+      clearInterval(timeoutId);
     };
   });
-  const previous = () => {
-    if (currentReview === 0) {
-      setCurrentReview(entries.length - 1);
-    } else {
-      setCurrentReview(currentReview - 1);
-    }
-  };
-  const next = () => {
-    if (currentReview === entries.length - 1) {
-      setCurrentReview(0);
-    } else {
-      setCurrentReview(currentReview + 1);
-    }
-  };
   return (
     <main className="main">
       <Header />
-      <div className="reviewapp">
-        <button className="btn left" onClick={previous}>
-          <svg
-            stroke="currentColor"
-            fill="none"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            height="1em"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <polyline points="15 18 9 12 15 6"></polyline>
-          </svg>
+      <section className="center">
+        {people.map((person, personIndex) => {
+          let position = "";
+          if (personIndex === index) {
+            position = "active-slide";
+          }
+          if (personIndex < index) {
+            position = "previous-slide";
+          }
+          if (personIndex > index) {
+            position = "next-slide";
+          }
+          return (
+            <section key={personIndex} className={position}>
+              <Review props={person} />
+            </section>
+          );
+        })}
+        <button onClick={() => setIndex(index - 1)} className="btn left">
+          <LeftArrow />
         </button>
-        <div className="review-slide">
-          <Review props={entries[currentReview]} />
-        </div>
-        <button className="btn right" onClick={next}>
-          <svg
-            stroke="currentColor"
-            fill="none"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            height="1em"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
+        <button onClick={() => setIndex(index + 1)} className="btn right">
+          <RightArrow />
         </button>
-      </div>
+      </section>
     </main>
   );
 };
