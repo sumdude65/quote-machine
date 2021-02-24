@@ -1,15 +1,17 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+.board {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  position: relative;
 }
-
-body {
+.row {
   width: 100%;
-  background-color: var(--secondary-color);
-  --primary-color: #bd4500;
-  --secondary-color: #cee5ed;
-  --paragraph-color: rgb(153, 153, 153);
-  --transition: all 0.3s linear;
+  height: 100%;
+}
+.square {
+  width: 30px;
+  height: 30px;
+  margin: 0.5rem;
+  font-size: 10px;
 }
