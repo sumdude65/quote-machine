@@ -1,5 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { QuoteBox } from "./components/quote-box";
+import { QuoteBox } from "./components/Quotebox/quote-box";
 
 ReactDOM.render(<QuoteBox />, document.getElementById("root"));
