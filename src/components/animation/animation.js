@@ -1,9 +1,9 @@
 import React from "react";
-import "./style.css";
+import "./style.scss";
 export const Loading = () => {
   return (
-    <div class="loadingscreen">
-      <div class="loading">
+    <div className="loadingscreen">
+      <div className="loading">
         <span></span>
         <span></span>
         <span></span>

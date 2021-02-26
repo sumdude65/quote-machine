@@ -1,61 +1,69 @@
 import React, { useState, useEffect } from "react";
 import { url } from "../api";
-import "./style.css";
-import { twitterIcon } from "../icons/icon";
+import { Quote } from "../Quote/index";
 import { Loading } from "../animation/animation";
+import "./style.scss";
 
-export const QuoteBox = (props) => {
-  const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [index, setIndex] = useState(0);
-  //fetches quotes
+export const QuoteBox = () => {
+  const [quotes, setQuotes] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [currentQuote, setCurrentQuote] = useState(0);
+  const [currentColor, setCurrentColor] = useState("");
+
+  const colors = [
+    "#16a085",
+    "#27ae60",
+    "#2c3e50",
+    "#f39c12",
+    "#e74c3c",
+    "#9b59b6",
+    "#FB6964",
+    "#342224",
+    "#472E32",
+    "#BDBB99",
+    "#77B1A9",
+    "#73A857",
+  ];
+
   useEffect(() => {
+    setCurrentColor(colors[Math.round(Math.random() * (colors.length - 1))]);
     fetch(url)
       .then((resp) => resp.json())
-      .then((obj) => {
-        const { quotes } = obj;
-        setData(quotes);
-        setIsLoading(false);
-      })
-      .catch((error) => console.log(error));
+      .then((data) => setQuotes(data.quotes))
+      .then(() => setLoading(false));
   }, []);
-  //generates random index
-  const newIndex = () => {
-    let newNumber = Math.random * data.length;
-    setIndex(newNumber);
+
+  const handleClick = () => {
+    setCurrentColor(colors[Math.round(Math.random() * (colors.length - 1))]);
+    const newNumber = Math.round(Math.random() * (quotes.length - 1));
+    setCurrentQuote(newNumber);
+    console.log(currentQuote);
   };
-  // checks loading
-  if (isLoading) {
+
+  if (loading) {
     return <Loading />;
   }
-  //renders content
+
   return (
-    <main>
-      {data.map((quote, idx) => {
-        let position = "";
-        if (idx === index) {
-          position = "active-quote";
-        } else {
-          position = "quote";
+    <main style={{ backgroundColor: currentColor }} className="bg">
+      {quotes.map((quote, index) => {
+        let position;
+        if (index === currentQuote) {
+          position = "active";
         }
-        return (
-          <section className={position}>
-            <main className="quotebox">
-              <div className="quote">
-                <h3>{quote.quote}</h3>
-              </div>
-              <div className="author">
-                <p>-{quote.author}</p>
-              </div>
-              <div className="buttons">
-                <a href="#">{twitterIcon}</a>
-                <button className="btn" onClick={() => newIndex()}>
-                  New Quote
-                </button>
-              </div>
-            </main>
-          </section>
-        );
+        if (index === currentQuote) {
+          return (
+            <div key={index} className={position}>
+              <Quote
+                handleClick={() => handleClick()}
+                props={quote}
+                color={currentColor}
+              />
+            </div>
+          );
+        } else {
+          return;
+        }
       })}
     </main>
   );

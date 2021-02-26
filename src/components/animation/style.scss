@@ -1,8 +1,5 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@import "../../style.scss";
+
 .loadingscreen {
   height: 100vh;
   width: 100%;
@@ -10,6 +7,9 @@
   justify-content: center;
   align-items: center;
   background-color: #221b25;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 .loading {
   width: 80px;
