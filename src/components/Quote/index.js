@@ -9,14 +9,17 @@ export const Quote = (props) => {
     "https://twitter.com/intent/tweet?text=" +
     encodeURIComponent(quote + "  " + "-" + author);
   return (
-    <section className="quote">
+    <section className="quote" id="text">
       <h3 style={{ color: coloring }}>{quote}</h3>
-      <p style={{ color: coloring }}>-{author}</p>
+      <p id="author" style={{ color: coloring }}>
+        -{author}
+      </p>
       <div className="buttons">
-        <a href={tweet} style={{ backgroundColor: coloring }}>
+        <a id="tweet-quote" href={tweet} style={{ backgroundColor: coloring }}>
           Tweet this quote
         </a>
         <button
+          id="new-quote"
           style={{ backgroundColor: coloring }}
           onClick={() => props.handleClick()}
         >

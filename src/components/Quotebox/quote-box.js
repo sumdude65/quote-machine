@@ -45,7 +45,11 @@ export const QuoteBox = () => {
   }
 
   return (
-    <main style={{ backgroundColor: currentColor }} className="bg">
+    <main
+      style={{ backgroundColor: currentColor }}
+      className="bg"
+      id="quote-box"
+    >
       {quotes.map((quote, index) => {
         let position;
         if (index === currentQuote) {
